@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09/05/2020 09:10:42 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Models.Ocorrencia" table="ocorrencia" catalog="estacionamento" optimistic-lock="version">
+        <id name="placa" type="string">
+            <column name="placa" length="10" />
+            <generator class="assigned" />
+        </id>
+        <property name="dataHora" type="string">
+            <column name="data_hora" length="30" />
+        </property>
+        <property name="descricao" type="string">
+            <column name="descricao" length="300" />
+        </property>
+        <property name="foto" type="binary">
+            <column name="foto" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

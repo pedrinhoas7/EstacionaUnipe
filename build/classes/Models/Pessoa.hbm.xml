@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09/05/2020 09:10:42 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Models.Pessoa" table="pessoa" catalog="estacionamento" optimistic-lock="version">
+        <id name="cpf" type="string">
+            <column name="cpf" length="15" />
+            <generator class="assigned" />
+        </id>
+        <property name="nome" type="string">
+            <column name="nome" length="30" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="10" />
+        </property>
+        <property name="senha" type="string">
+            <column name="senha" length="64" />
+        </property>
+    </class>
+</hibernate-mapping>
