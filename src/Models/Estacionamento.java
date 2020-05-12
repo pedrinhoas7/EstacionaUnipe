@@ -1,5 +1,5 @@
 package Models;
-// Generated 09/05/2020 09:10:42 by Hibernate Tools 4.3.1
+// Generated 12/05/2020 15:28:40 by Hibernate Tools 4.3.1
 
 
 
@@ -10,32 +10,39 @@ public class Estacionamento  implements java.io.Serializable {
 
 
      private String placa;
-     private String cpf;
      private String entrada;
+     private String cpf;
      private String saida;
-     private String setor;
      private String status;
      private String qtUso;
      private String qtLivre;
      private String qtTotal;
+     private String setor;
 
     public Estacionamento() {
     }
 
 	
-    public Estacionamento(String placa) {
-        this.placa = placa;
+    public Estacionamento(String setor) {
+        this.setor = setor;
     }
-    public Estacionamento(String placa, String cpf, String entrada, String saida, String setor, String status, String qtUso, String qtLivre, String qtTotal) {
+    public Estacionamento(String placa, String entrada, String cpf, String saida, String status, String qtUso, String qtLivre, String qtTotal, String setor) {
        this.placa = placa;
-       this.cpf = cpf;
        this.entrada = entrada;
+       this.cpf = cpf;
        this.saida = saida;
-       this.setor = setor;
        this.status = status;
        this.qtUso = qtUso;
        this.qtLivre = qtLivre;
        this.qtTotal = qtTotal;
+       this.setor = setor;
+    }
+
+    public Estacionamento(String cpf, String placa, String data, String um) {
+       this.cpf = cpf;
+       this.placa = placa;
+       this.entrada = data;
+       this.qtUso = um;  
     }
    
     public String getPlaca() {
@@ -45,13 +52,6 @@ public class Estacionamento  implements java.io.Serializable {
     public void setPlaca(String placa) {
         this.placa = placa;
     }
-    public String getCpf() {
-        return this.cpf;
-    }
-    
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
     public String getEntrada() {
         return this.entrada;
     }
@@ -59,19 +59,19 @@ public class Estacionamento  implements java.io.Serializable {
     public void setEntrada(String entrada) {
         this.entrada = entrada;
     }
+    public String getCpf() {
+        return this.cpf;
+    }
+    
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
     public String getSaida() {
         return this.saida;
     }
     
     public void setSaida(String saida) {
         this.saida = saida;
-    }
-    public String getSetor() {
-        return this.setor;
-    }
-    
-    public void setSetor(String setor) {
-        this.setor = setor;
     }
     public String getStatus() {
         return this.status;
@@ -100,6 +100,13 @@ public class Estacionamento  implements java.io.Serializable {
     
     public void setQtTotal(String qtTotal) {
         this.qtTotal = qtTotal;
+    }
+    public String getSetor() {
+        return this.setor;
+    }
+    
+    public void setSetor(String setor) {
+        this.setor = setor;
     }
 
 

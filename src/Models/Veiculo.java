@@ -1,5 +1,5 @@
 package Models;
-// Generated 09/05/2020 09:10:42 by Hibernate Tools 4.3.1
+// Generated 12/05/2020 15:28:40 by Hibernate Tools 4.3.1
 
 
 
@@ -21,19 +21,12 @@ public class Veiculo  implements java.io.Serializable {
     public Veiculo(String placa) {
         this.placa = placa;
     }
-
-    public Veiculo(String placa, String nome, String cpf, String tipo) {
-        this.placa = placa;
-        this.cpfDono = cpf;
-        this.nome = nome;
-        this.tipo = tipo;
+    public Veiculo(String placa, String nome, String tipo, String cpfDono) {
+       this.placa = placa;
+       this.nome = nome;
+       this.tipo = tipo;
+       this.cpfDono = cpfDono;
     }
-
-
-
-
-    
-
    
     public String getPlaca() {
         return this.placa;

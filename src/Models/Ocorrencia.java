@@ -1,5 +1,5 @@
 package Models;
-// Generated 09/05/2020 09:10:42 by Hibernate Tools 4.3.1
+// Generated 12/05/2020 15:28:40 by Hibernate Tools 4.3.1
 
 
 
@@ -22,11 +22,10 @@ public class Ocorrencia  implements java.io.Serializable {
     public Ocorrencia(String placa) {
         this.placa = placa;
     }
-    public Ocorrencia(String placa, String dataHora, String descricao, byte[] foto, String tipo) {
+    public Ocorrencia(String placa, String dataHora, String descricao,String tipo) {
        this.placa = placa;
        this.dataHora = dataHora;
        this.descricao = descricao;
-       this.foto = foto;
        this.tipo = tipo;
     }
    

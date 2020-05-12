@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12/05/2020 15:28:40 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Models.Estaciona" table="estaciona" catalog="estacionamento" optimistic-lock="version">
+        <id name="placa" type="string">
+            <column name="placa" length="20" />
+            <generator class="assigned" />
+        </id>
+        <property name="entrada" type="string">
+            <column name="entrada" length="30" />
+        </property>
+        <property name="cpf" type="string">
+            <column name="cpf" length="30" />
+        </property>
+        <property name="saida" type="string">
+            <column name="saida" length="50" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="30" />
+        </property>
+        <property name="qtUso" type="string">
+            <column name="qt_uso" length="50" />
+        </property>
+        <property name="qtLivre" type="string">
+            <column name="qt_livre" length="30" />
+        </property>
+        <property name="qtTotal" type="string">
+            <column name="qt_total" length="30" />
+        </property>
+        <property name="setor" type="string">
+            <column name="setor" length="40" />
+        </property>
+    </class>
+</hibernate-mapping>

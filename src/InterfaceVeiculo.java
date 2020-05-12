@@ -1,8 +1,10 @@
 
 import Models.Veiculo;
-import javax.swing.JInternalFrame;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.

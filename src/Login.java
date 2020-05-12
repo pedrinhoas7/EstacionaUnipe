@@ -1,11 +1,24 @@
 
+
+
 import Models.Estacionamento;
 import java.time.LocalDateTime;
-import java.util.List;
-import javax.swing.JFrame;
+import java.time.ZoneId;
+import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import views.Alunos;
+
+
+
+
+
+
+
+
+
+
 
 
 /*
@@ -23,6 +36,8 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    int identificador = 1;
+    
     public Login() {
         initComponents();
     }
@@ -42,23 +57,31 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        estacionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setInheritsPopupMenu(true);
 
-        cpf.setText("3");
+        cpf.setText("7");
 
-        placa.setText("PLACA");
+        placa.setText("7");
 
         jLabel1.setText("CPF :");
 
-        jLabel2.setText("Placa");
+        jLabel2.setText("Senha/Placa");
 
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        estacionar.setText("Estacionar");
+        estacionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estacionarActionPerformed(evt);
             }
         });
 
@@ -71,15 +94,17 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cpf)
                     .addComponent(placa, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
                 .addGap(63, 63, 63))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(151, 151, 151)
+                .addGap(40, 40, 40)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(estacionar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,9 +117,11 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(placa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(30, 30, 30)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(estacionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -114,33 +141,25 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //criar função para logar
-        String Cpf = cpf.getText();
-        String Placa =placa.getText();
-        Login(Cpf, Placa);
-         Estacionamento e = new Estacionamento();
-        String dt1 = LocalDateTime.now().toString();
-        System.out.println(dt1); 
-        e.setCpf(Cpf);
-        e.setPlaca(Placa);
-        e.setEntrada("2020");
-        e.setQtUso("1");
-        e.setQtTotal(Tipo);
-        
-        
-        try{
-            
-            Session sessao = HibernateUtil.getSessionFactory().openSession();
-            sessao.getTransaction();
-            sessao.persist(e);
-            
-            
-        }catch(HibernateException error){
-            
-        }
-        
+        String Cpf_logar = cpf.getText();
+        String senha =placa.getText();
+        Login(Cpf_logar,senha);
+         
+     
         
     }//GEN-LAST:event_jButton1ActionPerformed
-    private void Login(String cpf, String placa){
+
+    private void estacionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estacionarActionPerformed
+        // TODO add your handling code here:
+        String estCPF = cpf.getText();
+        String estPLACA =placa.getText();
+        EstacionaVeiculo(estCPF,estPLACA);
+        
+        
+        
+        
+    }//GEN-LAST:event_estacionarActionPerformed
+    private void Login(String cpf, String senha){
          
          
          try{
@@ -148,18 +167,17 @@ public class Login extends javax.swing.JFrame {
            
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             // transação
-            String select = "select tipo from pessoa where cpf = "+cpf;
-            String selectPlaca = "select tipo from pessoa where cpf = "+placa;
-            
-            Query q = sessao.createSQLQuery(select);
-           String query = q.list().get(0).toString();
-    
-         logar(query);
+          
          
-        
-            
+         String select = "select tipo from pessoa where cpf = "+cpf+" and senha ="+senha; 
+         Query q = sessao.createSQLQuery(select);
+         String query = q.list().get(0).toString();//AUX,RH,ADMIN,ETC     
+             logar(query);
+         this.dispose();
+              
         }catch(HibernateException error){
             System.out.println("Error :"+ error);
+             JOptionPane.showInputDialog("eroooraososooas");
         }
          
     }
@@ -201,6 +219,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cpf;
+    private javax.swing.JButton estacionar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -218,7 +237,7 @@ public class Login extends javax.swing.JFrame {
          else if(select.equals("ALUNO")){
              Alunos aluno = new Alunos();
             aluno.setVisible(true);
-            
+                            
                 
                  }
          else if(select.equals("RH")){
@@ -237,4 +256,30 @@ public class Login extends javax.swing.JFrame {
             System.out.println("Visitante seu id é" );
         }
     }
-}
+
+    private void EstacionaVeiculo(String cpf, String placa) {
+        try{
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+           sessao.beginTransaction();
+           String um = "1";
+           String data = String.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
+           
+           Estacionamento e = new Estacionamento(cpf,placa,data,um);
+           sessao.persist(e);     
+           sessao.getTransaction().commit();
+           
+           
+           EscolheVaga esc = new EscolheVaga(placa,cpf);
+           esc.setVisible(true);
+           this.dispose();
+              
+        }catch(HibernateException error){
+            System.out.println("Error :"+ error);
+        }
+        
+        
+    }
+       
+    
+    
+        }//fecha o programa

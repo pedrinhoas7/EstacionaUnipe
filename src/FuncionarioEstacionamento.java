@@ -1,4 +1,9 @@
 
+import Models.Evento;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -36,9 +41,15 @@ public class FuncionarioEstacionamento extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        monitorar = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        cadastrarEventos = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        cadastroOcorrencia = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Area de Trabalho do Funcionario Estacionamento");
+        setFocusCycleRoot(false);
         getContentPane().setLayout(null);
 
         jdpPrincipal.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -75,10 +86,40 @@ public class FuncionarioEstacionamento extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Monitorar");
+
+        monitorar.setText("Monitorar");
+        monitorar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monitorarActionPerformed(evt);
+            }
+        });
+        jMenu3.add(monitorar);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Evento");
+
+        cadastrarEventos.setText("Cadastrar");
+        cadastrarEventos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarEventosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(cadastrarEventos);
+
         jMenuBar1.add(jMenu4);
+
+        jMenu1.setText("Ocorrencia");
+
+        cadastroOcorrencia.setText("Cadastrar");
+        cadastroOcorrencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastroOcorrenciaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(cadastroOcorrencia);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -92,10 +133,39 @@ public class FuncionarioEstacionamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-      CrudeVeiculos c = new CrudeVeiculos();
+      CadastroVeiculo c = new CadastroVeiculo();
         jdpPrincipal.add(c);
         c.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void monitorarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monitorarActionPerformed
+        // TODO add your handling code here:
+        //monitorar
+        
+        Monitorar m = new Monitorar();
+        jdpPrincipal.add(m);
+        m.setVisible(true);
+        monitorar();
+        
+        
+    }//GEN-LAST:event_monitorarActionPerformed
+
+    private void cadastrarEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarEventosActionPerformed
+        // TODO add your handling code here:
+        CadastraEvento e = new CadastraEvento();
+        jdpPrincipal.add(e);
+        e.setVisible(true);
+        
+        
+    }//GEN-LAST:event_cadastrarEventosActionPerformed
+
+    private void cadastroOcorrenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroOcorrenciaActionPerformed
+        // TODO add your handling code here:
+        CadastrarOcorrencia c = new CadastrarOcorrencia();
+        jdpPrincipal.add(c);
+        c.setVisible(true);
+        
+    }//GEN-LAST:event_cadastroOcorrenciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,11 +203,26 @@ public class FuncionarioEstacionamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem cadastrarEventos;
+    private javax.swing.JMenuItem cadastroOcorrencia;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JDesktopPane jdpPrincipal;
+    private javax.swing.JMenuItem monitorar;
     // End of variables declaration//GEN-END:variables
+
+    private void monitorar() {
+       
+        try{
+            Session s = HibernateUtil.getSessionFactory().openSession();
+            String select = "select placa,cpf,data from estacionamento";
+            s.createSQLQuery(select);
+        }catch(HibernateException e){
+            System.out.println("erro"+e);
+        }
+    }
 }

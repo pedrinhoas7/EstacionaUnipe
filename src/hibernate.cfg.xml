@@ -45,8 +45,10 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/estacionamento?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.query.factory_class">org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory</property>
     <mapping resource="Models/Ocorrencia.hbm.xml"/>
     <mapping resource="Models/Veiculo.hbm.xml"/>
+    <mapping resource="Models/Estaciona.hbm.xml"/>
     <mapping resource="Models/Evento.hbm.xml"/>
     <mapping resource="Models/Estacionamento.hbm.xml"/>
     <mapping resource="Models/Pessoa.hbm.xml"/>
