@@ -40,12 +40,15 @@ public class FuncionarioEstacionamento extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         monitorar = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         cadastrarEventos = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         cadastroOcorrencia = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Area de Trabalho do Funcionario Estacionamento");
@@ -82,6 +85,14 @@ public class FuncionarioEstacionamento extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem2);
+
+        jMenuItem1.setText("Excluir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
 
         jMenuBar1.add(jMenu2);
 
@@ -120,6 +131,18 @@ public class FuncionarioEstacionamento extends javax.swing.JFrame {
         jMenu1.add(cadastroOcorrencia);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu5.setText("Autorizar Entrada");
+
+        jMenuItem3.setText("Estacionar Veiculo");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
 
@@ -167,6 +190,21 @@ public class FuncionarioEstacionamento extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cadastroOcorrenciaActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        ExcluiVeiculo e = new ExcluiVeiculo();
+        jdpPrincipal.add(e);
+        e.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        
+       Estacionar e = new Estacionar();
+       jdpPrincipal.add(e);
+       e.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -209,8 +247,11 @@ public class FuncionarioEstacionamento extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JDesktopPane jdpPrincipal;
     private javax.swing.JMenuItem monitorar;
     // End of variables declaration//GEN-END:variables

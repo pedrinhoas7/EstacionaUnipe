@@ -21,7 +21,7 @@ public class Pessoa  implements java.io.Serializable {
     public Pessoa(String cpf) {
         this.cpf = cpf;
     }
-    public Pessoa(String cpf, String nome, String tipo, String senha) {
+    public Pessoa(String nome, String senha,  String tipo,String cpf) {
        this.cpf = cpf;
        this.nome = nome;
        this.tipo = tipo;

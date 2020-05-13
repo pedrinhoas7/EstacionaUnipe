@@ -661,6 +661,7 @@ private String placa,cpf;
         // TODO add your handling code here:
         String setor = "SETOR_A";
         cadastraSetor(this.placa,this.cpf,setor);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

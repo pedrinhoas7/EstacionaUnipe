@@ -1,4 +1,9 @@
 
+import Models.Evento;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,15 +15,18 @@
  *
  * @author MeuComputador
  */
-public class Administrador extends javax.swing.JInternalFrame {
+public class Administrador extends javax.swing.JFrame {
 
     /**
-     * Creates new form Administrador
+     * Creates new form FuncionarioEstacionamento
      */
     public Administrador() {
         initComponents();
+        
     }
 
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,21 +36,91 @@ public class Administrador extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jdpPrincipal = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        monitorar = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        cadastrarEventos = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        Permissoes = new javax.swing.JMenu();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Area de Trabalho do Funcionario Estacionamento");
+        setFocusCycleRoot(false);
+        getContentPane().setLayout(null);
+
+        jdpPrincipal.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        javax.swing.GroupLayout jdpPrincipalLayout = new javax.swing.GroupLayout(jdpPrincipal);
+        jdpPrincipal.setLayout(jdpPrincipalLayout);
+        jdpPrincipalLayout.setHorizontalGroup(
+            jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 830, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jdpPrincipalLayout.setVerticalGroup(
+            jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 540, Short.MAX_VALUE)
         );
 
-        pack();
+        getContentPane().add(jdpPrincipal);
+        jdpPrincipal.setBounds(0, 0, 830, 540);
+
+        jMenu3.setText("Monitorar");
+
+        monitorar.setText("Monitorar");
+        monitorar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monitorarActionPerformed(evt);
+            }
+        });
+        jMenu3.add(monitorar);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Evento");
+
+        cadastrarEventos.setText("Cadastrar");
+        cadastrarEventos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarEventosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(cadastrarEventos);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("Relatorio");
+        jMenuBar1.add(jMenu5);
+
+        Permissoes.setText("permissoes");
+        jMenuBar1.add(Permissoes);
+
+        setJMenuBar(jMenuBar1);
+
+        setBounds(0, 0, 843, 588);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void monitorarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monitorarActionPerformed
+        // TODO add your handling code here:
+        //monitorar
+        
+        Monitorar m = new Monitorar();
+        jdpPrincipal.add(m);
+        m.setVisible(true);
+        monitorar();
+        
+        
+    }//GEN-LAST:event_monitorarActionPerformed
+
+    private void cadastrarEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarEventosActionPerformed
+        // TODO add your handling code here:
+        CadastraEvento e = new CadastraEvento();
+        jdpPrincipal.add(e);
+        e.setVisible(true);
+        
+        
+    }//GEN-LAST:event_cadastrarEventosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -61,24 +139,43 @@ public class Administrador extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FuncionarioEstacionamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FuncionarioEstacionamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FuncionarioEstacionamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FuncionarioEstacionamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Administrador().setVisible(true);
+                new FuncionarioEstacionamento().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu Permissoes;
+    private javax.swing.JMenuItem cadastrarEventos;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JDesktopPane jdpPrincipal;
+    private javax.swing.JMenuItem monitorar;
     // End of variables declaration//GEN-END:variables
+
+    private void monitorar() {
+       
+        try{
+            Session s = HibernateUtil.getSessionFactory().openSession();
+            String select = "select placa,cpf,data from estacionamento";
+            s.createSQLQuery(select);
+        }catch(HibernateException e){
+            System.out.println("erro"+e);
+        }
+    }
 }

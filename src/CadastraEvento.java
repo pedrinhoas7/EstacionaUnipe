@@ -1,5 +1,6 @@
 
 import Models.Evento;
+import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -53,6 +54,8 @@ public class CadastraEvento extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         cpf = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+
+        setTitle("Cadastrar Evento");
 
         jToggleButton1.setText("Salvar Evento");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -201,6 +204,7 @@ public class CadastraEvento extends javax.swing.JInternalFrame {
             
             //comit
             sessao.getTransaction().commit();
+            JOptionPane.showMessageDialog(null, "Evento cadastrado");
             
         }catch(HibernateException error){
             System.out.println("Error :"+ error);

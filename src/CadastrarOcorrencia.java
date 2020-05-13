@@ -2,6 +2,7 @@
 import Models.Ocorrencia;
 import Models.Veiculo;
 import java.time.LocalDate;
+import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -154,6 +155,7 @@ public class CadastrarOcorrencia extends javax.swing.JInternalFrame {
             
             //comit
             sessao.getTransaction().commit();
+            JOptionPane.showMessageDialog(null,"Ocorrencia registrada");
             
         }catch(HibernateException error){
             System.out.println("Error :"+ error);

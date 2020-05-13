@@ -1,6 +1,8 @@
 
 import Models.Estacionamento;
+import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 /*
@@ -23,7 +25,12 @@ public class Monitorar extends javax.swing.JInternalFrame {
       
       
     }
-
+    int sectorA = 0;
+    int sectorB = 0;
+    int sectorC = 0;
+    int sectorAO = 199;
+    int sectorBO = 100;
+    int sectorCO = 50;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -227,7 +234,7 @@ public class Monitorar extends javax.swing.JInternalFrame {
 
         jLabel39.setText("Livre");
 
-        jButton1.setText("Sair");
+        jButton1.setText("Atualizar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -545,8 +552,14 @@ public class Monitorar extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
           moni();
+        csao.setText(sectorA+"");
+        csbo.setText(sectorB+"");
+        csco.setText(sectorC+"");
+        csal.setText(sectorAO+"");
+        csbl.setText(sectorBO+"");
+        cscl.setText(sectorCO+"");
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -622,11 +635,31 @@ public void moni(){
     try{
         Session s = HibernateUtil.getSessionFactory().openSession();
         s.getTransaction();
-        Estacionamento estaci = (Estacionamento) s.load(Estacionamento.class, "7");
-        System.out.println(estaci.getEntrada());
-        String setor_a_livre = estaci.getSetor();
-       
+        Query q = s.createSQLQuery("select setor from estacionamento");
+        s.getTransaction(); 
         
+        List lister = q.list();
+      
+            for(Object setor : lister ){
+            System.out.println(setor);
+            String set = (String) setor ;
+            
+            if(set.equals("SETOR_A")){
+                System.out.println("setor A");
+                sectorA++;
+                sectorAO--;
+            }else if(set.equals("SETOR_B")){
+                System.out.println("setor B");
+                sectorB++;
+                sectorBO--;
+            }else if(set.equals("SETOR_C")){
+                System.out.println("setor C"); 
+                sectorC++;
+                sectorCO--;
+            }else{
+                System.out.println("outro");   
+            }
+    }
         
     }catch(HibernateException e){
         System.err.println("erro" + e);
