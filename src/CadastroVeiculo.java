@@ -152,23 +152,10 @@ public class CadastroVeiculo extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // Cadastrar Veiculo  
-        String CPF = cpf.getText();
-        String Nome = nome.getText();
-        String Placa = placa.getText();
-        String Tipo = tipo.getText();
-        cadastraVeiculo(Placa,Nome,CPF,Tipo);
-        JOptionPane.showMessageDialog(null,"Cadastrado com sucesso");
+        // função
+        cadastraVeiculo(placa.getText(),nome.getText(),cpf.getText(),tipo.getText());
+        //exit
         this.dispose();
-        
-        //exibir dados Veiculo
-        
-        
-        //limpa os campos
-        //nome.setText("");
-        //placa.setText("");
-        //tipo.setText("");
-        //id.setText("");
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
@@ -227,23 +214,23 @@ public class CadastroVeiculo extends javax.swing.JInternalFrame {
          
          
          try{
-             
+             //cria obj
             Veiculo v = new Veiculo(placa,nome,cpf,tipo);
             //sessao
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             // transação
             sessao.beginTransaction();
-            //persist
-            
-            sessao.persist(v);
-            
-            
-            
+            //persit
+            sessao.persist(v);            
             //comit
-            sessao.getTransaction().commit();
+            sessao.getTransaction().commit();  
+            //msg sucesso
+            JOptionPane.showMessageDialog(null,"Cadastrado com sucesso");
             
+            //erro
         }catch(HibernateException error){
-            System.out.println("Error :"+ error);
+            //msg erro
+            JOptionPane.showMessageDialog(null,"Erro :"+error);
         }
         
     }

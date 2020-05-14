@@ -137,14 +137,10 @@ public class Estacionar extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void estacionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estacionarActionPerformed
-        // TODO add your handling code here:
-        String estCPF = cpf.getText();
-        String estPLACA =placa.getText();
-        EstacionaVeiculo(estCPF,estPLACA);
-        
-        
-        
-        
+        // função
+        EstacionaVeiculo(cpf.getText(),placa.getText());
+        //exit
+        this.dispose();       
     }//GEN-LAST:event_estacionarActionPerformed
     private void Login(String cpf, String senha){
          
@@ -155,16 +151,19 @@ public class Estacionar extends javax.swing.JInternalFrame {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             // transação
           
-         
+         //sql
          String select = "select tipo from pessoa where cpf = "+cpf+" and senha ="+senha; 
          Query q = sessao.createSQLQuery(select);
-         String query = q.list().get(0).toString();//AUX,RH,ADMIN,ETC     
-             logar(query);
-         this.dispose();
-              
+         //retorna o tipo ex : AUX,RH,ADMIN,ETC
+         String query = q.list().get(0).toString();     
+         //função
+         logar(query);
+        
+         
+         //erro
         }catch(HibernateException error){
-            System.out.println("Error :"+ error);
-             JOptionPane.showInputDialog("eroooraososooas");
+            //msg erro
+             JOptionPane.showInputDialog("erro :"+error);
         }
          
     }
@@ -213,7 +212,9 @@ public class Estacionar extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField placa;
     // End of variables declaration//GEN-END:variables
-
+    
+    
+    //logar no app e opçoes de usuarios
     private void logar(String select) {
         if(select.equals("ADMIN")){
             Administrador adm = new Administrador();
@@ -228,7 +229,7 @@ public class Estacionar extends javax.swing.JInternalFrame {
                 
                  }
          else if(select.equals("RH")){
-                 RecursosHumanos rh = new RecursosHumanos();
+                 RecusosHumanos rh = new RecusosHumanos();
             rh.setVisible(true);
           
                  }
@@ -240,28 +241,42 @@ public class Estacionar extends javax.swing.JInternalFrame {
                  }
          
         else{
-            System.out.println("Visitante seu id é" );
+            JOptionPane.showMessageDialog(null,"Visitante e alunos ainda nao podem logar no sistema" );
         }
     }
+    
+    
 
     private void EstacionaVeiculo(String cpf, String placa) {
         try{
-            Session sessao = HibernateUtil.getSessionFactory().openSession();
+           //sessao
+           Session sessao = HibernateUtil.getSessionFactory().openSession();
+           //transação
            sessao.beginTransaction();
+           //esse numero vai somar as vagas posteriormente
            String um = "1";
+           //datatime
            String data = String.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
-           
+           //cria obj
            Estacionamento e = new Estacionamento(cpf,placa,data,um);
-           sessao.persist(e);     
+           //persiste no banco
+           sessao.persist(e); 
+           //commit
            sessao.getTransaction().commit();
            
+           //cria um novo obj passando dois parametros
            
+           // atualização que vai ser implementada junto com o desktop do aluno posteriormente
+           //substituir o escolhe vaga para o Jframe Aluno, implementar o escolhe vaga no 
+           //desktop e adicionar outras att
            EscolheVaga esc = new EscolheVaga(placa,cpf);
+           //torna visivel a interface para escolher o setor
            esc.setVisible(true);
-           this.dispose();
-              
+           
+        //erro      
         }catch(HibernateException error){
-            System.out.println("Error :"+ error);
+            //msg erro
+            JOptionPane.showMessageDialog(null,"Error :"+ error);
         }
         
         

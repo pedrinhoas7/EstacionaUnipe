@@ -1,5 +1,6 @@
 
 import Models.Pessoa;
+import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -129,9 +130,10 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
+        //função
         salvar(nome.getText(),senha.getText(),tipo.getText(),cpf.getText());
+        //exit
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -151,13 +153,17 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
 
     private void salvar(String nome, String senha, String tipo, String cpf) {
         try{
+            //sesao /transação/cria obj/persist/commit
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             Pessoa p = new Pessoa(nome,senha,tipo,cpf);
             s.persist(p);
             s.getTransaction().commit();
+            
+            //erro
         }catch(HibernateException e){
-            System.out.println("erro : "+e);
+            //msg erro
+            JOptionPane.showMessageDialog(null,"Erro  "+e);
         }
     }
 }

@@ -1,5 +1,5 @@
 
-import Models.Evento;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -44,6 +44,7 @@ public class Administrador extends javax.swing.JFrame {
         cadastrarEventos = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         Permissoes = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Area de Trabalho do Funcionario Estacionamento");
@@ -93,7 +94,16 @@ public class Administrador extends javax.swing.JFrame {
         jMenu5.setText("Relatorio");
         jMenuBar1.add(jMenu5);
 
-        Permissoes.setText("permissoes");
+        Permissoes.setText("Pessoas");
+
+        jMenuItem1.setText("Adicionar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Permissoes.add(jMenuItem1);
+
         jMenuBar1.add(Permissoes);
 
         setJMenuBar(jMenuBar1);
@@ -102,25 +112,34 @@ public class Administrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void monitorarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monitorarActionPerformed
-        // TODO add your handling code here:
-        //monitorar
-        
+        //Construir interface monitorar
         Monitorar m = new Monitorar();
+        //add ao painel desktop
         jdpPrincipal.add(m);
+        //tornar visivel
         m.setVisible(true);
-        monitorar();
-        
-        
+  
     }//GEN-LAST:event_monitorarActionPerformed
 
     private void cadastrarEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarEventosActionPerformed
-        // TODO add your handling code here:
+        // Construir interface cadastro
         CadastraEvento e = new CadastraEvento();
+        //add ao painel desktop
         jdpPrincipal.add(e);
+        //tornar visivel
         e.setVisible(true);
         
         
     }//GEN-LAST:event_cadastrarEventosActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // Construir interface cadastro
+        CadastroPessoa p = new CadastroPessoa();
+        //add ao painel desktop
+        jdpPrincipal.add(p);
+        //tornar visivel
+        p.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,18 +183,9 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JDesktopPane jdpPrincipal;
     private javax.swing.JMenuItem monitorar;
     // End of variables declaration//GEN-END:variables
-
-    private void monitorar() {
-       
-        try{
-            Session s = HibernateUtil.getSessionFactory().openSession();
-            String select = "select placa,cpf,data from estacionamento";
-            s.createSQLQuery(select);
-        }catch(HibernateException e){
-            System.out.println("erro"+e);
-        }
-    }
+     
 }

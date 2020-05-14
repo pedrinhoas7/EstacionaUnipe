@@ -1,6 +1,5 @@
 
 import Models.Ocorrencia;
-import Models.Veiculo;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
@@ -117,10 +116,9 @@ public class CadastrarOcorrencia extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-      
+        //função
         cadastrarOcorrencia(placa.getText()+LocalDate.now(),data.getText(),tipo.getText(),descricao.getText());
-        
+        //exit
         this.dispose();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -141,24 +139,23 @@ public class CadastrarOcorrencia extends javax.swing.JInternalFrame {
         
         
         try{
-             
+             // cria ocorrencia
             Ocorrencia o = new Ocorrencia(placa,dataHora,descricao,tipo);
             //sessao
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             // transação
             sessao.beginTransaction();
-            //persist
-            
+            //persist        
             sessao.persist(o);
-            
-            
-            
             //comit
             sessao.getTransaction().commit();
+            //msg ocorrencia registrada
             JOptionPane.showMessageDialog(null,"Ocorrencia registrada");
             
+         //erro   
         }catch(HibernateException error){
-            System.out.println("Error :"+ error);
+            //msg erro
+            JOptionPane.showMessageDialog(null,"Erro :"+error);
         }
         
         

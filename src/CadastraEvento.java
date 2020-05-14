@@ -161,11 +161,9 @@ public class CadastraEvento extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
- 
-        
+        //função
         cadastrarEvento(cpf.getText(),descricao.getText(),inicio.getText(),fim.getText(),nomeEvento.getText(),qtVagas.getText(),setor.getText());
-        
+        //exit
         this.dispose();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -190,24 +188,22 @@ public class CadastraEvento extends javax.swing.JInternalFrame {
 
     private void cadastrarEvento(String cpf, String descricao, String dataHoraInicio, String dataHoraFim, String nomeEvento, String qtVagas, String setor) {
         try{
-             
+             //cria o evento
             Evento e = new Evento(cpf,descricao,dataHoraInicio,dataHoraFim,nomeEvento,qtVagas,setor);
-            //sessao
+            //abre a sessao
             Session sessao = HibernateUtil.getSessionFactory().openSession();
-            // transação
+            //transação
             sessao.beginTransaction();
-            //persist
-            
+            //persist informação
             sessao.persist(e);
-            
-            
-            
-            //comit
+           //comit
             sessao.getTransaction().commit();
+            //msg cadastrado
             JOptionPane.showMessageDialog(null, "Evento cadastrado");
             
+            //erro
         }catch(HibernateException error){
-            System.out.println("Error :"+ error);
+            JOptionPane.showMessageDialog(null, "Erro :"+error);
         }
     }
 }

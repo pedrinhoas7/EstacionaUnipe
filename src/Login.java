@@ -252,7 +252,7 @@ public class Login extends javax.swing.JFrame {
                 
                  }
          else if(select.equals("RH")){
-                 RecursosHumanos rh = new RecursosHumanos();
+                 RecusosHumanos rh = new RecusosHumanos();
             rh.setVisible(true);
           
                  }

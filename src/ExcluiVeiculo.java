@@ -1,5 +1,4 @@
 
-import Models.Veiculo;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -104,9 +103,9 @@ public class ExcluiVeiculo extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
+        //função
         exclusao(cpf.getText(),placa.getText());
+        //exit
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -122,6 +121,7 @@ public class ExcluiVeiculo extends javax.swing.JInternalFrame {
 
     private void exclusao(String text, String text0) {
         try{
+            //sessao,transação,sql,commit,msg
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             Query query = s.createSQLQuery("delete from veiculo where cpf_dono = :cpf and placa = :placa");
@@ -129,11 +129,11 @@ public class ExcluiVeiculo extends javax.swing.JInternalFrame {
             query.setParameter("placa", text0);
             query.executeUpdate();
             s.getTransaction().commit();
-            System.out.println(query.executeUpdate());
             JOptionPane.showMessageDialog(null,"Veiculo excluido do DB");
             
+            //erro e msg erro
         }catch(HibernateException e){
-            System.err.println("erro :"+ e );
+            JOptionPane.showMessageDialog(null,"Erro"+e);
         }
     }
 }

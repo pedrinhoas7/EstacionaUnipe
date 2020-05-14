@@ -1,5 +1,4 @@
 
-import Models.Estaciona;
 import Models.Estacionamento;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
@@ -20,11 +19,14 @@ import org.hibernate.Session;
  */
 public class EscolheVaga extends javax.swing.JFrame {
 private String placa,cpf;
+     //passado por parametro cpf e vaga da interface login
     /**
      * Creates new form Monitorar
      * @param placa
      * @param cpf
      */
+
+    //construtor com o parametro
     public EscolheVaga(String placa, String cpf) {
         this.placa = placa;
         this.cpf = cpf;
@@ -256,8 +258,18 @@ private String placa,cpf;
         });
 
         jButton2.setText("CARRO B");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("CARRO C");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("MOTO A");
 
@@ -428,15 +440,12 @@ private String placa,cpf;
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jLabel23)))
+                            .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(bsao, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bsal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14))
@@ -658,11 +667,25 @@ private String placa,cpf;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String setor = "SETOR_A";
-        cadastraSetor(this.placa,this.cpf,setor);
+        // função
+        cadastraSetor(this.placa,this.cpf,"SETOR_A");
+        //exit
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // função
+        cadastraSetor(this.placa,this.cpf,"SETOR_B");
+        //exit
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // função
+        cadastraSetor(this.placa,this.cpf,"SETOR_C");
+        //exit
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -745,34 +768,24 @@ private String placa,cpf;
     // End of variables declaration//GEN-END:variables
 
     private void cadastraSetor(String placa,String cpf,String setor) {
+        //guardado pra ser usado posteriormente para maior segurança
        placa = "0";
         try{
+             // cria obj, sessao,transação,sql,execult,commit
              Estacionamento e = new Estacionamento(setor);
             Session s = HibernateUtil.getSessionFactory().openSession();   
             s.beginTransaction();
             Query query = s.createSQLQuery("update estacionamento set setor = '"+setor+"'  where cpf = '"+cpf+"'");
-           
             query.executeUpdate();
             s.getTransaction().commit();
+            //msg sucesso
             JOptionPane.showMessageDialog(null,"Cadastrado com sucesso");
    
+            //erro
         }catch(HibernateException e){
-            System.out.println("erro "+e);
+            //mmsg erro
             JOptionPane.showMessageDialog(null, e);
         }
             
-    }
-    public void monitora(){
-        try{
-            Session s = HibernateUtil.getSessionFactory().openSession();
-            s.beginTransaction();
-            Query query = s.createQuery("from Estacionamento");
-            query.list();
-            System.out.println(query.list());
-            
-        }catch(HibernateException e){
-            System.err.println("Erro"+e);
-            
-        }
     }
 }
